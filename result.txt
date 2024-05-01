@@ -1,0 +1,7 @@
+                              : Book #1    | Book #2   
+all words                     : 2800       | 2800      
+will understand               : 97.33%     | 97.43%    
+will understand per book      : 97.39%     | 100%      
+will learn                    : 600        | 600       
+will recognize                : 1600       | 1700      
+will see a few times          : 600        | 600       
