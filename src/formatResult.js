@@ -10,7 +10,7 @@ module.exports = function(result) {
       content += `${''.padEnd(30, ' ')}: ${counts.map((_, index) => `Book #${index + 1}`.padEnd(10, ' ')).join(' | ')}\n`;
     }
 
-    if(key === 'will understand' || key === 'will understand per book') counts = counts.map(count => count.toString() + '%');
+    if(key === 'will understand' || key === 'will understand per book') counts = counts.map(count => (Math.min(100, count + 1)).toString() + '%'); // we add 1% to account for non-translatable words, names, and typos
     else counts = counts.map(count => (Math.round(count / 100) * 100));
 
     content += `${key.padEnd(30, ' ')}: ${counts.map(count => count.toString().padEnd(10, ' ')).join(' | ')}\n`;
