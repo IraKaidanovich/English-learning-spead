@@ -1,4 +1,3 @@
-const fs = require('node:fs');
 const getBooksFileNames = require('./src/getBooksFileNames');
 const getWords = require('./src/getWords');
 const mapWords = require('./src/mapWords');
@@ -101,64 +100,6 @@ async function main() {
   }
 
   saveResult(content);
-}
-
-function filterDistinctWords(map) {
-  let distinctWords = [];
-  for(let word in map) {
-    const count = map[word];
-
-    distinctWords.push([word, count]);
-  }
-
-  distinctWords.sort((a, b) => b[1] - a[1]);
-
-  return distinctWords.filter(([word, count]) => count > 3);
-}
-
-function categorizeWords(distinctWords) {
-  const conditions = [
-    ['will learn', pair => pair[1] > 20],
-    ['will recognize', pair => pair[1] >= 5 && pair[1] <= 20],
-    ['will see a few times', pair => pair[1] < 5],
-  ];
-
-  let categories = [];
-
-  conditions.forEach(([name, callback]) => {
-    categories.push([name, distinctWords.filter(callback)]);
-  });
-
-  categories = categories.map(([name, distinctList]) => {
-    const categoryTotalCount = distinctList.reduce(([wordA, countA], [wordB, countB]) => ['', countB + countA], ['', 0])[1];
-
-    return [name, distinctList, categoryTotalCount];
-  });
-
-  return categories;
-}
-
-function saveWords(fileName, dictionary) {
-  let content = '';
-  dictionary.forEach(pair => {
-    content += `${pair[0]} *: ${pair[1]}\n`;
-  });
-
-  try {
-    fs.writeFileSync(`./distinctWords/${fileName}.txt`, content);
-    // file written successfully
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-function saveResult(content) {
-  try {
-    fs.writeFileSync(`./result.txt`, content);
-    // file written successfully
-  } catch (err) {
-    console.error(err);
-  }
 }
 
 main();

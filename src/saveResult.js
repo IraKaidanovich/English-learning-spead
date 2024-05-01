@@ -1,3 +1,5 @@
+const fs = require('node:fs');
+
 module.exports = function saveResult(content) {
   try {
     fs.writeFileSync(`./result.txt`, content);

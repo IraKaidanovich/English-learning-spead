@@ -1,3 +1,5 @@
+const fs = require('node:fs');
+
 module.exports = function mapWords(words) {
   const map = {};
 

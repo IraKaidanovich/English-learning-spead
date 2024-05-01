@@ -1,3 +1,5 @@
+const fs = require('node:fs');
+
 module.exports = function saveWords(fileName, dictionary) {
   let content = '';
   dictionary.forEach(pair => {
